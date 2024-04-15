@@ -1,0 +1,12 @@
+spring.datasource.url=jdbc:postgresql://localhost:5433/projetoads
+spring.datasource.username= 
+spring.datasource.password= 
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.datasource.driverClassName= org.postgresql.Driver
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults= false
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL16Dialect
+spring.thymeleaf.mode=HTML
+spring.thymeleaf.cache=FALSE
