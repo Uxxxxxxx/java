@@ -1,24 +1,4 @@
 # java
 códigos em java
 
-package procedural;
-
-import java.util.Scanner;
-
-public class SomaSimples
-{
-  public static void main(String args[]) 
-  {
-	  Scanner imput = new Scanner(System.in);
-	      int num1;
-	      int num2;
-	      int soma;
-	      
-	  System.out.print ("Digite o primeiro valor:");
-	      num1 = imput.nextInt();
-	  System.out.print ("Digite o segundo valor:");
-	      num2 = imput.nextInt();
-	      soma = num1+num2;
-	  System.out.println ("Total da soma:" + soma);
-  }//fim main
-}//fim classe
+Um projeto de login na linguagem java, desenvolvido durante o término do curso de Análise e Desenvolvimento de Sistemas e a matéria Linguagem de programação orientada à objetos II, ministrada pelo Professor Lucas Silveira, utilizando as ferramentas de spring boot e tymeleaf. (ano 2024)
