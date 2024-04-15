@@ -1,0 +1,77 @@
+package com.projeto.ads.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.projeto.ads.model.Usuario;
+import com.projeto.ads.repository.UserRepository;
+import java.time.LocalDate;
+
+@Service
+public class UserService {
+    
+	@Autowired
+	UserRepository userRepository;
+	/*se houverum erro de regra de negoio , retorna esse erro.
+	  *se nao houver erro , retorna null.
+	*/
+	
+ public String validaErros(Usuario user, String ConfirmPassword, String dataNascimentoString) {
+		String error= null;
+		///verificar se a senha e a confirmação de senha correspondem
+		if (!user.getPassword().equals(ConfirmPassword)) {
+			error="As senhas não correspondem!";
+			return error;
+		}//
+		
+	if(user.getPassword().length() <8) {
+		error="a senha precisa ter no minimo 8 caracteres!!";
+		return error;
+	}
+	String email = user.getEmail();
+	Usuario retorno= userRepository.findByEmail(email);
+	if (retorno !=null) {//achou um usuario na base de dados relacionado a esse email
+		error="Esse email já está cadastrado na aplicação!";
+		return error;
+	}
+			if(!this.data(dataNascimentoString)) {
+				error="Data de nascimento é invalida!";
+			}
+		
+		return error;		
+}	//fim validaError
+	
+	//*return true se a data vier dentro do esperado 
+	//*return false caso a dataNasc esteja maior do que a data corrente
+
+  public boolean data(String datasNasc) {
+	LocalDate hoje = LocalDate.now();//pega a data corrente
+	int dia = hoje.getDayOfMonth();//pega o dia
+	int ano = hoje.getYear();//pega o ano
+	int mes = hoje.getMonthValue();//pega o mes
+	String [] partes = datasNasc.split("-"); //"2024-02-17" partes[0]= 2024 , partes[1]= 02, partes[2]= 17
+	//extrair o ano,mes e dia
+	int anoNasc = Integer.parseInt(partes[0]);
+	int mesNasc = Integer.parseInt(partes[1]);
+	int diaNasc = Integer.parseInt(partes[2]);
+	
+	if(anoNasc <= ano) {
+		return true;		
+	}
+	else {//anoNasc = ano
+		if(mesNasc < mes) {
+			return true;
+		}
+		else {//mesNasc = mes
+			if(diaNasc <= dia) {
+				return true;
+			}
+		}
+	}//fim else
+	
+	return false;//indica que a data nao está correta
+
+}//fim datasNasc
+
+
+}
